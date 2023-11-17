@@ -28,6 +28,6 @@ public final class Command2 {
             return 0;
         }
 
-         // Success
+         // Successs
     }
 }
