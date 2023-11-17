@@ -1,26 +1,25 @@
 package com.example;
 
 import com.example.blocks.ExampleBlock;
+import com.example.commands.Command2;
+import com.example.commands.CommandTest;
 import com.example.items.CustomItem;
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static net.minecraft.server.command.CommandManager.literal;
 
 public class TemplateMod implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
@@ -43,7 +42,16 @@ public class TemplateMod implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("foo")
+				.executes(context -> {
+					// For versions since 1.20, please use the following, which is intended to avoid creating Text objects if no feedback is needed.
+					context.getSource().sendMessage(Text.literal("Called /foo with no arguments"));
 
+					return 1;
+				})));
+
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> CommandTest.register(dispatcher));
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> Command2.register(dispatcher));
 		Registry.register(Registries.BLOCK, new Identifier("template-mod", "example_block"), EXAMPLE_BLOCK);
 		Registry.register(Registries.ITEM, new Identifier("template-mod", "example_block"), new BlockItem(EXAMPLE_BLOCK, new Item.Settings()));
 		LOGGER.info("Hello Fabric world!");
