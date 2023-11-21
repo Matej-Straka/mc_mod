@@ -36,7 +36,7 @@ public class CustomItem extends Item {
         playerEntity.sendMessage(Text.literal("funguje Toto?"));
         CubeEntity cubeE = TemplateMod.CUBE.create(world);
         try{
-            List<CubeEntity> ent = world.getEntitiesByClass(CubeEntity.class, Box.from(Vec3d.of(Vec3i.ZERO)), EntityPredicates.VALID_ENTITY);
+            List<CubeEntity> ent = world.getEntitiesByClass(CubeEntity.class, Box.from(Vec3d.add(Vec3i.ZERO, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ())), EntityPredicates.VALID_ENTITY);
             CubeEntity cube = ent.get(0);
             cube.move(MovementType.SELF, Vec3d.add(Vec3i.ZERO, cube.getX() + 20, cube.getY(), cube.getZ()));
         } catch (Exception e) {
