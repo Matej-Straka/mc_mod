@@ -19,8 +19,4 @@ public class CubeEntity extends PathAwareEntity {
         super(entityType, world);
     }
 
-    @Override
-    public void move(MovementType movementType, Vec3d movement) {
-        super.move(movementType, movement);
-    }
 }
