@@ -2,7 +2,6 @@ package com.example.items;
 
 import com.example.TemplateMod;
 import com.example.entity.CubeEntity;
-import net.minecraft.entity.MovementType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,23 +12,18 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
-import java.lang.Object.*;
 import java.util.List;
 
-public class CustomItem extends Item {
+public class Dopredu extends Item {
 
-    public CustomItem(Item.Settings settings) {
+    public Dopredu(Item.Settings settings) {
         super(settings);
     }
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand) {
-        playerEntity.playSound(SoundEvents.BLOCK_WOOL_BREAK, 1.0F, 1.0F);
-        playerEntity.sendMessage(Text.literal("funguje Toto?"));
         CubeEntity cubeE = TemplateMod.CUBE.create(world);
         try{
             Box box = new Box(playerEntity.getX() - 100, playerEntity.getY() - 100, playerEntity.getZ() - 100, playerEntity.getX() + 100, playerEntity.getY() + 100, playerEntity.getZ() + 100);
