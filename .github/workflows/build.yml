@@ -2,7 +2,9 @@
 # and submitted pull request. This can help catch issues that only occur on
 # certain platforms or Java versions, and provides a first line of defence
 # against bad commits.
-
+                name: Upload files to a GitHub release
+                uses: svenstaro/upload-release-action@2.7.0
+            
 name: build
 on: [pull_request, push]
 
@@ -38,3 +40,12 @@ jobs:
         with:
           name: Artifacts
           path: build/libs/
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: target/release/mything
+        asset_name: mything
+        tag: ${{ github.ref }}
+        overwrite: true
+        body: "This is my release text"  
