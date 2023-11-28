@@ -53,7 +53,7 @@ public class TemplateMod implements ModInitializer {
 	public static final Item DOZADU = new Dozadu(new FabricItemSettings().maxCount(1));
 
 	public static final Item DOLEVA = new Doleva(new FabricItemSettings().maxCount(1));
-
+d
 	public static final Item DOPRAVA = new Doprava(new FabricItemSettings().maxCount(1));
 
 
