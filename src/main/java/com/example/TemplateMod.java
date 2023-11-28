@@ -17,7 +17,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -57,12 +56,14 @@ public class TemplateMod implements ModInitializer {
 
 	public static final Item DOPRAVA = new Doprava(new FabricItemSettings().maxCount(1));
 
+
 	public static final EntityModelLayer MODEL_CUBE_LAYER = new EntityModelLayer(new Identifier("template-mod", "textures/entity/cube/cube.png"), "main");
 	public static final EntityType<CubeEntity> CUBE = Registry.register(
 			Registries.ENTITY_TYPE,
 			new Identifier("template-mod", "cube"),
 			FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, CubeEntity::new).dimensions(EntityDimensions.fixed(2f, 2f)).build()
 	);
+	public static final Item CUBE_SPAWN_EGG = new SpawnEggItem(CUBE, 0xff0000, 0x00a2ff, new FabricItemSettings());
 
 	private static final ItemGroup ITEMY = FabricItemGroup.builder()
 			.icon(() -> new ItemStack(EXAMPLE_BLOCK))
@@ -73,6 +74,7 @@ public class TemplateMod implements ModInitializer {
 				entries.add(DOLEVA);
 				entries.add(DOPRAVA);
 				entries.add(EXAMPLE_BLOCK);
+				entries.add(CUBE_SPAWN_EGG);
 			})
 			.build();
 
@@ -109,6 +111,7 @@ public class TemplateMod implements ModInitializer {
 
 		FabricDefaultAttributeRegistry.register(CUBE, CubeEntity.createMobAttributes());
 
+		Registry.register(Registries.ITEM, new Identifier("template-mod", "cube_spawn_egg"), CUBE_SPAWN_EGG);
 		Registry.register(Registries.ITEM_GROUP, new Identifier("template-mod", "itemy"), ITEMY);
 	}
 }

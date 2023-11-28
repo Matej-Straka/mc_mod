@@ -3,7 +3,8 @@
   "item.template-mod.doprava": "Doprava",
   "item.template-mod.dopredu": "Dopredu",
   "item.template-mod.dozadu": "Dozadu",
-  "item.template-mod.example_block": "Blok",
+  "block.template-mod.example_block": "Block",
+  "item.template-mod.cube_spawn_egg": "Spawn Cube",
   "itemGroup.template-mod.itemy": "Itemy"
 
 }
