@@ -2,6 +2,7 @@
 # and submitted pull request. This can help catch issues that only occur on
 # certain platforms or Java versions, and provides a first line of defence
 # against bad commits.
+
                 name: Upload files to a GitHub release
                 uses: svenstaro/upload-release-action@2.7.0
             
