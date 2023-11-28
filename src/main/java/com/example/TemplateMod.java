@@ -55,7 +55,7 @@ public class TemplateMod implements ModInitializer {
 	public static final Item DOLEVA = new Doleva(new FabricItemSettings().maxCount(1));
 
 	public static final Item DOPRAVA = new Doprava(new FabricItemSettings().maxCount(1));
-d
+
 
 	public static final EntityModelLayer MODEL_CUBE_LAYER = new EntityModelLayer(new Identifier("template-mod", "textures/entity/cube/cube.png"), "main");
 	public static final EntityType<CubeEntity> CUBE = Registry.register(
