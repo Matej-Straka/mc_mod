@@ -77,7 +77,6 @@ public class TemplateMod implements ModInitializer {
 				entries.add(CUBE_SPAWN_EGG);
 			})
 			.build();
-
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
@@ -101,7 +100,6 @@ public class TemplateMod implements ModInitializer {
 		Registry.register(Registries.BLOCK, new Identifier("template-mod", "example_block"), EXAMPLE_BLOCK);
 		Registry.register(Registries.ITEM, new Identifier("template-mod", "example_block"), new BlockItem(EXAMPLE_BLOCK, new Item.Settings()));
 		LOGGER.info("Hello Fabric world!");
-
 
 
 
