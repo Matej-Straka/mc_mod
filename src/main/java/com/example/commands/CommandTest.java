@@ -1,32 +1,72 @@
 package com.example.commands;
 
-import com.mojang.brigadier.Command;
+import com.example.TemplateMod;
+import com.example.entity.CubeEntity;
 import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.command.argument.ColorArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 
+import net.minecraft.entity.MovementType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
-import static com.mojang.brigadier.arguments.StringArgumentType.getString;
-import static com.mojang.brigadier.arguments.StringArgumentType.greedyString;
-import static net.minecraft.command.argument.ColorArgumentType.getColor;
+import java.util.List;
+
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public final class CommandTest {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher){
-        dispatcher.register(literal("broadcast")
-                .requires(source -> source.hasPermissionLevel(2)) // Must be a game master to use the command. Command will not show up in tab completion or execute to non operators or any operator that is permission level 1.
-                .then(argument("color", ColorArgumentType.color())
-                        .then(argument("message", greedyString())
-                                .executes(ctx -> broadcast(ctx.getSource(), getColor(ctx, "color"), getString(ctx, "message")))))); // You can deal with the arguments out here and pipe them into the command.
+        dispatcher.register(literal("move")
+                .then(literal("dopredu")
+                        .then(argument("početbloku", IntegerArgumentType.integer())
+                                .executes(ctx-> pohyb(ctx.getSource(), IntegerArgumentType.getInteger(ctx, "početbloku"), 1))))
+                .then(literal("doleva")
+                        .then(argument("početbloku", IntegerArgumentType.integer())
+                                .executes(ctx-> pohyb(ctx.getSource(), IntegerArgumentType.getInteger(ctx, "početbloku"), 2))))
+                .then(literal("doprava")
+                        .then(argument("početbloku", IntegerArgumentType.integer())
+                                .executes(ctx-> pohyb(ctx.getSource(), IntegerArgumentType.getInteger(ctx, "početbloku"), 3))))
+                .then(literal("dozadu")
+                        .then(argument("početbloku", IntegerArgumentType.integer())
+                                .executes(ctx-> pohyb(ctx.getSource(), IntegerArgumentType.getInteger(ctx, "početbloku"), 4))))
+                );
     }
+    static int pohyb(ServerCommandSource source, Integer posun, int arg){
+        PlayerEntity playerEntity = source.getPlayer();
+        World world = source.getWorld();
+        int x = 0;
+        int z = 0;
+        switch(arg) {
+            case 1:
+                x = posun;
+                break;
+            case 2:
+                z = -posun;
+                break;
+            case 3:
+                z = posun;
+                break;
+            case 4:
+                x = -posun;
+                break;
+        }
+        CubeEntity cubeE = TemplateMod.CUBE.create(world);
+        try{
+            Box box = new Box(playerEntity.getX() - 100, playerEntity.getY() - 100, playerEntity.getZ() - 100, playerEntity.getX() + 100, playerEntity.getY() + 100, playerEntity.getZ() + 100);
+            List<CubeEntity> ent = world.getEntitiesByClass(CubeEntity.class, box , EntityPredicates.VALID_ENTITY);
+            CubeEntity cube = ent.get(0);
+            cube.move(MovementType.SELF, new Vec3d(x, 0, z));
 
-    public static int broadcast(ServerCommandSource source, Formatting formatting, String message) {
-        final Text text = Text.literal(message).formatted(formatting);
-
-        source.getServer().getPlayerManager().broadcast(text, true);
-        return Command.SINGLE_SUCCESS; // Success
+        } catch (Exception e) {
+            playerEntity.sendMessage(Text.literal(e.getLocalizedMessage()));
+            world.spawnEntity(cubeE);
+            cubeE.setPos(playerEntity.getX(), playerEntity.getY(), playerEntity.getZ());
+        }
+        return 1;
     }
 }

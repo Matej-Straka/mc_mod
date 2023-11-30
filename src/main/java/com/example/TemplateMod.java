@@ -61,7 +61,7 @@ public class TemplateMod implements ModInitializer {
 	public static final EntityType<CubeEntity> CUBE = Registry.register(
 			Registries.ENTITY_TYPE,
 			new Identifier("template-mod", "cube"),
-			FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, CubeEntity::new).dimensions(EntityDimensions.fixed(2f, 2f)).build()
+			FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, CubeEntity::new).dimensions(EntityDimensions.fixed(0.75f, 0.75f)).build()
 	);
 	public static final Item CUBE_SPAWN_EGG = new SpawnEggItem(CUBE, 0xff0000, 0x00a2ff, new FabricItemSettings());
 
