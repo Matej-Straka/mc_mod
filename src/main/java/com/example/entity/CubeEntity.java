@@ -1,7 +1,9 @@
 package com.example.entity;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MovementType;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 /*
@@ -16,10 +18,20 @@ public class CubeEntity extends PathAwareEntity {
     public CubeEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
     }
+    private float x = 0;
+    private float y = 0;
+    private float z = 0;
 
+    public void povolit(float x, float y, float z){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
     @Override
     public void tick() {
         super.tick();
-
+        this.move(MovementType.SELF, new Vec3d(x, y, z));
     }
+
+
 }

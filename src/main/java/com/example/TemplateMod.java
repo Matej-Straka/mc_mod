@@ -3,6 +3,7 @@ package com.example;
 import com.example.blocks.ExampleBlock;
 import com.example.commands.Command2;
 import com.example.commands.CommandTest;
+import com.example.commands.JedCommand;
 import com.example.entity.CubeEntity;
 import com.example.items.Doleva;
 import com.example.items.Doprava;
@@ -96,6 +97,7 @@ public class TemplateMod implements ModInitializer {
 		Registry.register(Registries.ITEM, new Identifier("template-mod", "doleva"), DOLEVA);
 		Registry.register(Registries.ITEM, new Identifier("template-mod", "doprava"), DOPRAVA);
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> CommandTest.register(dispatcher));
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> JedCommand.register(dispatcher));
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> Command2.register(dispatcher));
 		Registry.register(Registries.BLOCK, new Identifier("template-mod", "example_block"), EXAMPLE_BLOCK);
 		Registry.register(Registries.ITEM, new Identifier("template-mod", "example_block"), new BlockItem(EXAMPLE_BLOCK, new Item.Settings()));

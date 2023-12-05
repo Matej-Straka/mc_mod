@@ -41,19 +41,11 @@ public final class CommandTest {
         World world = source.getWorld();
         int x = 0;
         int z = 0;
-        switch(arg) {
-            case 1:
-                x = posun;
-                break;
-            case 2:
-                z = -posun;
-                break;
-            case 3:
-                z = posun;
-                break;
-            case 4:
-                x = -posun;
-                break;
+        switch (arg) {
+            case 1 -> x = posun;
+            case 2 -> z = -posun;
+            case 3 -> z = posun;
+            case 4 -> x = -posun;
         }
         CubeEntity cubeE = TemplateMod.CUBE.create(world);
         try{
