@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " W ",
+    "W#W",
+    " # "
+  ],
+  "key": {
+    "W": {
+      "item" : "minecraft:stick"
+    },
+    "#": {
+      "item" : "minecraft:cobblestone"
+    }
+  },
+  "result": {
+    "item": "template-mod:dopredu",
+    "count": 1
+  }
+}

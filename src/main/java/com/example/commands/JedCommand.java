@@ -89,6 +89,7 @@ public final class JedCommand {
             List<CubeEntity> ent = world.getEntitiesByClass(CubeEntity.class, box , EntityPredicates.VALID_ENTITY);
             CubeEntity cube = ent.get(0);
             cube.setNoGravity(true);
+            cube.setHealth(10000000);
             cube.povolit(x1, y1, z1);
         } catch (Exception e) {
             playerEntity.sendMessage(Text.literal(e.getLocalizedMessage()));

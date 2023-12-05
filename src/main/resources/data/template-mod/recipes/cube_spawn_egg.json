@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "S C",
+    " W "
+  ],
+  "key": {
+    "#": {
+      "item" : "template-mod:dopredu"
+    },
+    "S": {
+      "item" : "template-mod:doleva"
+    },
+    "C": {
+      "item" : "template-mod:doprava"
+    },
+    "W": {
+      "item" : "template-mod:dozadu"
+    }
+  },
+  "result": {
+    "item": "template-mod:cube_spawn_egg",
+    "count": 1
+  }
+}
