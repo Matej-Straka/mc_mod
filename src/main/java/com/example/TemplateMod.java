@@ -13,6 +13,7 @@ import com.example.renderer.CubeEntityRenderer;
 import net.fabricmc.api.ModInitializer;
 
 
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -22,7 +23,9 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -31,9 +34,11 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.example.model.CubeEntityModel;
+
 
 import static net.minecraft.server.command.CommandManager.literal;
 
@@ -56,6 +61,28 @@ public class TemplateMod implements ModInitializer {
 	public static final Item DOLEVA = new Doleva(new FabricItemSettings().maxCount(1));
 
 	public static final Item DOPRAVA = new Doprava(new FabricItemSettings().maxCount(1));
+
+	private static KeyBinding dopredu;
+	private static KeyBinding dozadu;
+
+	public static KeyBinding getDopredu() {
+		return dopredu;
+	}
+
+	public static KeyBinding getDozadu() {
+		return dozadu;
+	}
+
+	public static KeyBinding getDoleva() {
+		return doleva;
+	}
+
+	public static KeyBinding getDoprava() {
+		return doprava;
+	}
+
+	private static KeyBinding doleva;
+	private static KeyBinding doprava;
 
 
 	public static final EntityModelLayer MODEL_CUBE_LAYER = new EntityModelLayer(new Identifier("template-mod", "textures/entity/cube/cube.png"), "main");
@@ -90,6 +117,32 @@ public class TemplateMod implements ModInitializer {
 
 					return 1;
 				})));
+
+
+		dopredu = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+				"key.examplemod.dopredu", // The translation key of the keybinding's name
+				InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
+				GLFW.GLFW_KEY_I, // The keycode of the key
+				"category.examplemod.test" // The translation key of the keybinding's category.
+		));
+		dozadu = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+				"key.examplemod.dozadu", // The translation key of the keybinding's name
+				InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
+				GLFW.GLFW_KEY_K, // The keycode of the key
+				"category.examplemod.test" // The translation key of the keybinding's category.
+		));
+		doleva = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+				"key.examplemod.doleva", // The translation key of the keybinding's name
+				InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
+				GLFW.GLFW_KEY_J, // The keycode of the key
+				"category.examplemod.test" // The translation key of the keybinding's category.
+		));
+		doprava = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+				"key.examplemod.doprava", // The translation key of the keybinding's name
+				InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
+				GLFW.GLFW_KEY_L, // The keycode of the key
+				"category.examplemod.test" // The translation key of the keybinding's category.
+		));
 
 
 		Registry.register(Registries.ITEM, new Identifier("template-mod", "dopredu"), DOPREDU);

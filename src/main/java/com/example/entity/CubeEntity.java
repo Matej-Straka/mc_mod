@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import com.example.TemplateMod;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.mob.PathAwareEntity;
@@ -31,7 +32,17 @@ public class CubeEntity extends PathAwareEntity {
     public void tick() {
         super.tick();
         this.move(MovementType.SELF, new Vec3d(x, y, z));
+        if(TemplateMod.getDopredu().isPressed()){
+            this.move(MovementType.SELF, new Vec3d(1,0,0));
+        }
+        if(TemplateMod.getDozadu().isPressed()){
+            this.move(MovementType.SELF, new Vec3d(-1,0,0));
+        }
+        if(TemplateMod.getDoleva().isPressed()){
+            this.move(MovementType.SELF, new Vec3d(0,0,-1));
+        }
+        if(TemplateMod.getDoprava().isPressed()){
+            this.move(MovementType.SELF, new Vec3d(0,0,1));
+        }
     }
-
-
 }
