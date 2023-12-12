@@ -44,5 +44,8 @@ public class CubeEntity extends PathAwareEntity {
         if(TemplateMod.getDoprava().isPressed()){
             this.move(MovementType.SELF, new Vec3d(0,0,1));
         }
+        if(TemplateMod.getJump().isPressed()){
+            this.jump();
+        }
     }
 }

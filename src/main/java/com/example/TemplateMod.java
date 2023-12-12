@@ -65,6 +65,9 @@ public class TemplateMod implements ModInitializer {
 	private static KeyBinding dopredu;
 	private static KeyBinding dozadu;
 
+	private static KeyBinding doleva;
+	private static KeyBinding doprava;
+
 	public static KeyBinding getDopredu() {
 		return dopredu;
 	}
@@ -81,8 +84,11 @@ public class TemplateMod implements ModInitializer {
 		return doprava;
 	}
 
-	private static KeyBinding doleva;
-	private static KeyBinding doprava;
+	public static KeyBinding getJump() {
+		return jump;
+	}
+
+	private static KeyBinding jump;
 
 
 	public static final EntityModelLayer MODEL_CUBE_LAYER = new EntityModelLayer(new Identifier("template-mod", "textures/entity/cube/cube.png"), "main");
@@ -141,6 +147,12 @@ public class TemplateMod implements ModInitializer {
 				"key.examplemod.doprava", // The translation key of the keybinding's name
 				InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
 				GLFW.GLFW_KEY_L, // The keycode of the key
+				"category.examplemod.test" // The translation key of the keybinding's category.
+		));
+		jump = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+				"key.examplemod.jump", // The translation key of the keybinding's name
+				InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
+				GLFW.GLFW_KEY_M, // The keycode of the key
 				"category.examplemod.test" // The translation key of the keybinding's category.
 		));
 
